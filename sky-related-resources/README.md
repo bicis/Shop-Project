@@ -1,0 +1,2 @@
+database/sky_take_out.sql:
+这是整个店铺的在线点单系统的后端数据库部分，如果你想使用这个部分，您可以直接复制到console中执行
