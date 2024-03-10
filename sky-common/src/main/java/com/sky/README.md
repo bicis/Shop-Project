@@ -1,0 +1,16 @@
+constant:
+常量，存放常量类。
+context:
+上下文，存放项目中与上下文相关的类。
+enumeration:
+枚举，存放项目中使用到的枚举类。
+exception:
+存放自定义的一些异常类。
+json:
+存放处理json转换的一些类。
+properties:
+配置属性，将spring-boot的配置属性封装为对象。
+result:
+结果，后端的返回结果。
+utils:
+工具类。
