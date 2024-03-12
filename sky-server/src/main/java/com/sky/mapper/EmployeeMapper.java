@@ -11,6 +11,14 @@ import org.apache.ibatis.annotations.Select;
 public interface EmployeeMapper {
 
     /**
+     * 根据id查询员工信息
+     * @param id
+     * @return
+     */
+    @Select("select * from employee where id = #{id}")
+    Employee getById(long id);
+
+    /**
      * 根据用户名查询员工
      * @param username
      * @return
