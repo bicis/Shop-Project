@@ -1,9 +1,11 @@
 package com.sky.controller.admin;
 
 import com.sky.constant.JwtClaimsConstant;
+import com.sky.context.BaseContext;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
+import com.sky.dto.PasswordEditDTO;
 import com.sky.entity.Employee;
 import com.sky.properties.JwtProperties;
 import com.sky.result.PageResult;
@@ -35,7 +37,7 @@ public class EmployeeController {
     private JwtProperties jwtProperties;
 
     /**
-     * 登录
+     * 员工登录
      * @param employeeLoginDTO
      * @return
      */
@@ -65,14 +67,13 @@ public class EmployeeController {
     }
 
     /**
-     * 退出
-     *
+     * 退出登录
      * @return
      */
     @PostMapping("/logout")
-    @ApiOperation(value = "员工登出")
+    @ApiOperation(value = "退出登录")
     public Result<String> logout() {
-        log.info("员工登出");
+        log.info("退出登录");
         return Result.success();
     }
 
@@ -103,15 +104,15 @@ public class EmployeeController {
     }
 
     /**
-     * 启用禁用员工账号
+     * 启用、禁用员工账号
      * @param status
      * @param id
      * @return
      */
     @PostMapping("/status/{status}")
-    @ApiOperation("启用禁用员工账号")
+    @ApiOperation("启用、禁用员工账号")
     public Result startOrStop(@PathVariable("status") Integer status, Long id) {
-        log.info("启用禁用员工账号，{}，{}", status, id);
+        log.info("启用、禁用员工账号，{}，{}", status, id);
         employeeService.startOrStop(status, id);
         return Result.success();
     }
@@ -139,6 +140,20 @@ public class EmployeeController {
     public Result update(@RequestBody EmployeeDTO employeeDTO) {
         log.info("编辑员工信息：{}", employeeDTO);
         employeeService.update(employeeDTO);
+        return Result.success();
+    }
+
+    /**
+     * 修改密码
+     * @param passwordEditDTO
+     * @return
+     */
+    @PutMapping("editPassword")
+    @ApiOperation("修改密码")
+    public Result editPassword(@RequestBody PasswordEditDTO passwordEditDTO) {
+        log.info("修改密码：{}", passwordEditDTO);
+        passwordEditDTO.setEmpId(BaseContext.getCurrentId());
+        employeeService.editPassword(passwordEditDTO);
         return Result.success();
     }
 }
